@@ -1,0 +1,108 @@
+<% layout("./layout/boilerplate.ejs") %>
+
+    <div class="row mt-3">
+        <div class="col-6 offset-2">
+            <h3 class="card-title">
+                <%=listing.title %>
+            </h3>
+            <div class="card listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top show-image" alt="Listing Iamge">
+            </div>
+
+            <div class="card-body">
+
+                <p class="card-text">
+                    <i>Owned By:- <%=listing.owner.username %></i>
+                    <br>
+                    <hr>
+                    <%=listing.description %>
+
+                </p>
+
+                <%=listing.location %>
+
+                    <%=listing.country %>
+
+                        <% if (curUser && curUser._id .equals(listing.owner._id)) {%>
+                           <div class="isauth">
+                                <br> &#x20B9 <%=listing.price.toLocaleString("en-in")%>
+                                    <br>
+                                    <div><a class="btn btn-info show-btns"
+                                            href="/listings/<%=listing._id%>/edit">edit</a>
+                                    </div>
+
+                                    <div>
+                                        <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+
+                                            <button class="btn btn-danger show-btns mt-3 mb-3"> Delete</button>
+                                    </div>
+                            </div>
+                             <% } %>
+
+            </div>
+        </div>
+
+        </form>
+        <hr>
+     <% if(curUser) {%>
+        <div class="col-8 offset-2">
+            <h4>Leave Review</h4>
+            <form method="post" action="/listings/<%=listing._id%>/review" class="needs-validation " novalidate>
+                <div>
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-control">
+                </div>
+                <div>
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea name="review[comment]" id="comment" cols="50" rows="5" class="form-control"
+                        required></textarea>
+                    <div class="invalid-feedback">Comment not be empty</div>
+
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-dark mb-3 mt-3">Add Comment</button>
+                </div>
+
+
+            </form>
+<% } %>
+            <div>
+                <h5>Reviews</h5>
+
+
+ 
+                <div class="row">
+                    <% for(let review of listing.review) {%>
+                        <div class="card col-5 mb-3 ms-3 ">
+                            <div class="card-body">
+                                <div class="card-title"><b>@<%=review.author.username %></b></div>
+                                <div class="card-text">
+                                    <%=review.comment %>
+                                </div>
+                                <div class="card-text">
+                                    <%=review.rating %> Star
+                                </div>
+                                <div>
+                                    <%if(curUser && curUser._id.equals(review.author._id)){ %>
+                                   <form action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=delete"
+                                        method="post">
+                                        <button type="submit" class="btn btn-dark"> delete</button>
+                                    </form>
+                                     <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    </div>
+
+    </div>
