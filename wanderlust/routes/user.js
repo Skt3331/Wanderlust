@@ -1,47 +1,29 @@
-const express=require("express");
-const router=express.Router();
-
-
-const User =require("../models/user.js"); 
+const express = require("express");
+const router = express.Router();
+const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
-// router.use(express.urlencoded({ extended: true }));
+const passport = require("passport");
+const { isLoggedIn, saveRedirectUrl } = require("../middleware.js");
+const usercontroller = require("../controller/user.js");
 
-const passport=require("passport");
+// Route for login
+router.route("/login")
+    .get((req, res) => {
+        res.render("./users/login.ejs");
+    })
+    .post(saveRedirectUrl, passport.authenticate("local", {
+        failureRedirect: "/login",
+        failureFlash: true
+    }), wrapAsync(usercontroller.login));
 
-const {isLoggedIn,saveRedirectUrl}=require("../middleware.js");
+// Route for logout
+router.get("/logout", isLoggedIn, usercontroller.logout);
 
-const usercontroller=require("../controller/user.js");
+// Route for signup
+router.route("/signup")
+    .get((req, res) => {
+        res.render("./users/signup.ejs");
+    })
+    .post(wrapAsync(usercontroller.signup));
 
-
-router.get("/login",(req,res)=>
-{
-    res.render("./users/login.ejs");
-});
-
-
-
-router.post("/login",saveRedirectUrl,passport.authenticate
-("local",{failureRedirect:"/login",failureFlash:true})
-,wrapAsync(usercontroller.login ));
-
-
-router.get("/logout",isLoggedIn,usercontroller.logout);
-
-
-
-
-
-
-
-
-
-
-
-
-router.get("/signup",(req,res)=>
-{
-    res.render("./users/signup.ejs");
-});
-router.post("/signup",wrapAsync(usercontroller.signup));
-
-module.exports=router;
+module.exports = router;
