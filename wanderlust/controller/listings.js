@@ -12,7 +12,7 @@ module.exports.create = async (
   const newlisting = new Listing(req.body.listing);
   newlisting.owner = req.user._id;
   await newlisting.save();
-  await newlisting.save();
+  // await newlisting.save();
   req.flash("sucess", "new listing created;")
   res.redirect("/listings");
 }

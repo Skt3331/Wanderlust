@@ -5,6 +5,10 @@ const mongoose = require("mongoose"); // require mongodb use nvm node 18 +versio
 const Listing = require("./models/listing.js");
 const path = require("path");
 
+///for processing on image
+// const multer=require('multer');
+// const upload=multer({dest:'uploads/'});  //create upload folder and upload//
+
 app.use(express.urlencoded({ extended: true })); //uncode req.body means post request content
 
 app.set("view engine", "ejs"); // set view as express java script
