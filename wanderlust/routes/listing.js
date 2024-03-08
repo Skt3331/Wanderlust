@@ -11,14 +11,12 @@ const upload=multer({storage});
 
 router.route("/")
   ///index route
-  .get(listingController.index)
+  .get(wrapAsync(listingController.index))
   //create route
-  .post(upload.single('listing[image]'),(req,res)=>
-  {
-    res.send(req.file);
-  });
-  // .post(validatetion, wrapAsync(listingController.create)
-  // );
+
+  .post(isLoggedIn,//validatetion,
+    upload.single("listing[image]"),wrapAsync(listingController.create)
+  );
 
 
 //update route
@@ -29,7 +27,7 @@ router.get(
 
 router.route("/:id")
 
-  .put(isLoggedIn, isOwner,                                 //here was passed walidation as middleware it will validate than procide the next process
+  .put(isLoggedIn, isOwner,  upload.single("listing[image]"),                               //here was passed walidation as middleware it will validate than procide the next process
     wrapAsync(listingController.update
     )
   )

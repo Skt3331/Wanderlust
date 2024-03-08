@@ -3,7 +3,7 @@
 
     <div class="row">
         <div class="col-8 offset-2" mt-3>
-    <form action="/listings/<%=listing._id%>?_method=PUT" method="post" class="needs-validation" novalidate>
+    <form action="/listings/<%=listing._id%>?_method=PUT" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
         <div class="mb-3">
             <lable for="title" class="form-lable">Titile</lable>
             <input type="text" value="<%=listing.title%>" name="listing[title]" placeholder="enter title"
@@ -21,13 +21,14 @@
                 <div class="invalid-feedback">Description not be Blank</div>
 
         </div>
-
+        <div class="card listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top show-image" alt="Listing Iamge">
+        </div>
         <div class="mb-3">
-            <lable for="image.url" class="form-lable">Image</lable>
-            <input type="text" value="<%=listing.image.url %>" name="listing[image.url]" placeholder="enter url"
-                class="form-control" required>
+            <label for="image" class="form-label">Image</label>
+            <br> <input type="file" name="listing[image]" placeholder="enter url" class="form-control" > 
 
-                <div class="invalid-feedback">Enter valid Url</div>
+            <div class="invalid-feedback">Enter valid file</div>
 
         </div>
 
