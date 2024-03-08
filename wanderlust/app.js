@@ -1,3 +1,14 @@
+
+if(process.env.NODE_ENV !="production")
+{
+  require("dotenv").config();
+}
+
+
+
+
+
+
 const express = require("express"); //require express
 const app = express(); // express function
 const mongoose = require("mongoose"); // require mongodb use nvm node 18 +version
