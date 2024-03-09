@@ -1,25 +1,35 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link " aria-current="page" href="/">Home</a>
+        <!-- <a class="nav-link " aria-current="page" href="/">Home</a> -->
         <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
-  
+       
+        
       </div>
+      <nav class="navbar  navbar-search ms-auto" >
+        <div class="container-fluid ">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-danger search-button" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
      <div class="navbar-nav ms-auto"></div>
+<a class="nav-link me-3" href="/listings/new">Airbub Your Home</a>
       <% if(!curUser) {%>
-     
-        <a class="nav-link" aria-current="page" href="/signup">SignUp</a>
-        <div class="me-3"></div>
-        <a class="nav-link" href="/login">Login</a>
+         
+   <b>     <a class="nav-link me-3" aria-current="page" href="/signup">SignUp</a>
+        <div class="me-3"></div></b>
+     <b>  <a class="nav-link " href="/login">Login</a>
       
         <% } else { %>
-                 <a class="nav-link" href="/logout">Logout</a>
+                 <a class="nav-link" href="/logout">Logout</a></b> 
  <% } %>
 
       </div>

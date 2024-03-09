@@ -95,3 +95,32 @@ text-decoration: none;
 .show-btns{
     display: flex;
 }
+
+#filters
+{
+
+}
+.filter 
+{    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    text-align: center;
+  
+}
+.filter div{
+    margin-left: 2rem; 
+    opacity: 70% ;
+}
+.filter div:hover{
+   opacity: 100%;
+
+}
+.tax-info{
+    display: none;
+}
+.navbar-search{
+    background-color:transparent !important;
+}
+.search-box{
+    border-radius: 20%;
+}
